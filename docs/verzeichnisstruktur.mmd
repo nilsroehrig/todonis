@@ -1,0 +1,20 @@
+%% Druckauflösung (ca. 300 dpi) erzeugen mit:
+%%   mmdc -i verzeichnisstruktur.mmd -o verzeichnisstruktur-treeview.png -s 4 --backgroundColor white
+treeView-beta
+    todonis/
+        app/ ## Anwendungslogik
+            controllers/ ## HTTP-Controller für Auth und Sessions
+            exceptions/ ## Zentrale Fehlerbehandlung
+            middleware/ ## Middleware für Auth, Gäste und View-Bindings
+            models/ ## Datenmodelle für User
+            validators/ ## Validierung von Benutzereingaben
+        bin/ ## Einstiegspunkte für Server, Konsole und Tests
+        config/ ## Anwendungskonfiguration (DB, Auth, Session, Security)
+        database/ ## Datenbankkonfiguration
+            migrations/ ## Datenbankschemamigrationen
+        resources/ ## Frontend-Assets und Edge-Templates
+            css/ ## Globale Styles
+            js/ ## Clientseitiges JavaScript
+            views/ ## Edge-Vorlagen für Seiten, Komponenten und Partials
+        start/ ## App-Startlogik (Routen, Middleware, Umgebungsvariablen)
+        tests/ ## Tests und Test-Initialisierung
