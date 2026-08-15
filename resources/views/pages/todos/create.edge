@@ -1,0 +1,32 @@
+@layout()
+  <div class="form-container">
+    <div>
+      <h1>Todo erstellen</h1>
+      <p>Gib unten den Titel und eine optionale Beschreibung für dein Todo an.</p>
+    </div>
+
+    <div>
+      @form({ route: 'todos.store', method: 'POST' })
+        <div>
+          @field.root({ name: 'title' })
+            @!field.label({ text: 'Titel' })
+            @!input.control({ type: 'text' })
+            @!field.error()
+          @end
+        </div>
+
+        <div>
+          @field.root({ name: 'description' })
+            @!field.label({ text: 'Beschreibung' })
+            @!input.control({ type: 'textarea' })
+            @!field.error()
+          @end
+        </div>
+
+        <div>
+          @!button({ text: 'Erstellen', type: 'submit' })
+        </div>
+      @end
+    </div>
+  </div>
+@end
