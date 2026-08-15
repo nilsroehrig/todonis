@@ -15,7 +15,7 @@ export class TodoSchema extends BaseModel {
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()
-  declare description: string
+  declare description: string | null
   @column({ isPrimary: true })
   declare id: number
   @column()
@@ -23,7 +23,7 @@ export class TodoSchema extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
-  declare userId: string
+  declare userId: number
 }
 
 export class UserSchema extends BaseModel {
