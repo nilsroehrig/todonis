@@ -1,0 +1,40 @@
+@layout()
+  <div class="form-container">
+    <div>
+      <h1>Todo bearbeiten</h1>
+      <p>Passe Titel, Beschreibung und Status deines Todos an.</p>
+    </div>
+
+    <div>
+      @form({ route: 'todos.update', routeParams: { id: todo.id }, method: 'PUT' })
+        <div>
+          @field.root({ name: 'title' })
+            @!field.label({ text: 'Titel' })
+            @!input.control({ type: 'text', value: todo.title })
+            @!field.error()
+          @end
+        </div>
+
+        <div>
+          @field.root({ name: 'description' })
+            @!field.label({ text: 'Beschreibung' })
+            @!input.control({ type: 'textarea', value: todo.description })
+            @!field.error()
+          @end
+        </div>
+
+        <div>
+          @field.root({ name: 'completed' })
+            @!field.label({ text: 'Erledigt' })
+            @!input.control({ type: 'checkbox', value: 'true', checked: todo.completed })
+            @!field.error()
+          @end
+        </div>
+
+        <div>
+          @!button({ text: 'Speichern', type: 'submit' })
+        </div>
+      @end
+    </div>
+  </div>
+@end
