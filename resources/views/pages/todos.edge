@@ -8,8 +8,12 @@
         @endif
         |
          @field.root({ name: 'title' })
-           @!input.control({ type: 'checkbox', checked: todo.completed, disabled: true })
-         @end
+            @!input.control({ type: 'checkbox', checked: todo.completed, disabled: true })
+          @end
+        |
+        @form({ route: 'todos.destroy', routeParams: { id: todo.id } })
+          @!button({ text: 'Löschen', type: 'submit' })
+        @end
       </li>
     @end
   </ul>
