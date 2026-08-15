@@ -11,7 +11,7 @@ export class TodoSchema extends BaseModel {
   static $columns = ['completed', 'createdAt', 'description', 'id', 'title', 'updatedAt', 'userId'] as const
   $columns = TodoSchema.$columns
   @column()
-  declare completed: string
+  declare completed: boolean
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()

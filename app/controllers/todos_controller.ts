@@ -11,18 +11,22 @@ export default class TodosController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ view }: HttpContext) {
+    return view.render('pages/todos/create')
+  }
 
   /**
    * Handle form submission for the create action
    */
-  async store({ request, auth }: HttpContext) {
+  async store({ request, auth, response }: HttpContext) {
     const data = await request.validateUsing(createValidator)
     await Todo.create({
       title: data.title,
       description: data.description,
       userId: auth.user!.id,
+      completed: false,
     })
+    response.redirect('/todos')
   }
 
   /**
