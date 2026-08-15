@@ -26,5 +26,6 @@ router
 router
   .group(() => {
     router.post('logout', [controllers.Session, 'destroy'])
+    router.resource('todos', controllers.Todos)
   })
   .use(middleware.auth())

@@ -1,0 +1,16 @@
+@layout()
+ <ul>
+    @each(todo in todos)
+      <li>
+        <strong>{{ todo.title }}</strong>
+        @if(todo.description)
+          : {{ todo.description }}
+        @endif
+        |
+         @field.root({ name: 'title' })
+           @!input.control({ type: 'checkbox', checked: todo.completed, disabled: true })
+         @end
+      </li>
+    @end
+  </ul>
+@end

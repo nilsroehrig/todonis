@@ -6,7 +6,10 @@ export default class TodosController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {}
+  async index({ view, auth }: HttpContext) {
+    const todos = await auth.user!.related('todos').query().orderBy('createdAt', 'desc')
+    return view.render('pages/todos', { todos })
+  }
 
   /**
    * Display form to create a new record
