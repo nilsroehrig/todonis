@@ -1,5 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createValidator } from '#validators/todo'
+import { completeValidator, createValidator } from '#validators/todo'
 import Todo from '#models/todo'
 
 export default class TodosController {
@@ -40,15 +40,45 @@ export default class TodosController {
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params, auth, response, view }: HttpContext) {
+    const todo = await Todo.findOrFail(params.id)
+
+    this.assertIsOwner(auth, response, todo)
+
+    return view.render('pages/todos/edit', { todo })
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request, response, auth }: HttpContext) {
+    const data = await request.validateUsing(completeValidator)
+    const todo = await Todo.findOrFail(params.id)
+
+    this.assertIsOwner(auth, response, todo)
+
+    todo.title = data.title
+    todo.description = data.description
+    todo.completed = data.completed
+
+    await todo.save()
+
+    response.redirect('/todos')
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) {}
+  async destroy({ params, auth, response }: HttpContext) {
+    const todo = await Todo.findOrFail(params.id)
+    this.assertIsOwner(auth, response, todo)
+
+    response.redirect('/todos')
+  }
+
+  private assertIsOwner(auth: HttpContext['auth'], response: HttpContext['response'], todo: Todo) {
+    if (todo.userId !== auth.user!.id) {
+      response.forbidden()
+    }
+  }
 }
