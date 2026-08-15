@@ -59,7 +59,7 @@ export default class TodosController {
 
     todo.title = data.title
     todo.description = data.description
-    todo.completed = data.completed
+    todo.completed = data.completed ?? false
 
     await todo.save()
 
