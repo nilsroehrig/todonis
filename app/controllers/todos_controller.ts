@@ -73,6 +73,8 @@ export default class TodosController {
     const todo = await Todo.findOrFail(params.id)
     this.assertIsOwner(auth, response, todo)
 
+    await todo.delete()
+
     response.redirect('/todos')
   }
 
